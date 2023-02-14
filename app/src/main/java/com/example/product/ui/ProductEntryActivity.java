@@ -40,8 +40,8 @@ public class ProductEntryActivity extends AppCompatActivity {
     private ActivityProductEntryBinding binding;
 
     private Product product;
-    Double latitude;
-    Double longitude;
+    Double latitude = 43.6426;
+    Double longitude = -79.3871;
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -88,7 +88,8 @@ public class ProductEntryActivity extends AppCompatActivity {
                 @Override
                 public void onLocationChanged(@NonNull Location location) {
                     Log.i(TAG, "onLocationChanged: " + location);
-                    updateLocationInfo(location);
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
                 }
             };
 
@@ -98,8 +99,10 @@ public class ProductEntryActivity extends AppCompatActivity {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                 Location lasKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (lasKnownLocation != null)
-                    updateLocationInfo(lasKnownLocation);
+                if (lasKnownLocation != null) {
+                    latitude = lasKnownLocation.getLatitude();
+                    longitude = lasKnownLocation.getLongitude();
+                }
             }
         }
     }
@@ -141,11 +144,6 @@ public class ProductEntryActivity extends AppCompatActivity {
         ProductViewModel productViewModel = new ViewModelProvider(this, new ProductViewModelFactory(getApplicationContext())).get(ProductViewModel.class);
         productViewModel.deleteProduct(product);
         finish();
-    }
-
-    private void updateLocationInfo(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
     }
 
     private  void showMap(View view) {
