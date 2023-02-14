@@ -27,4 +27,7 @@ public interface ProductDao {
 
     @Update
     void update(Product product);
+
+    @Insert
+    void insertAll(Product product[]);
 }
