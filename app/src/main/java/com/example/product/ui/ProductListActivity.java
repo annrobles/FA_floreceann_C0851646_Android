@@ -51,11 +51,11 @@ public class ProductListActivity extends AppCompatActivity implements SearchView
                         String name = data.getStringExtra("name");
                         String description = data.getStringExtra("description");
                         Double price = Double.parseDouble(data.getStringExtra("price"));
-                        Double latitude = 40.124;
-                        Double longitude = 79.123;
+                        Double latitude = Double.parseDouble(data.getStringExtra("latitude"));
+                        Double longitude = Double.parseDouble(data.getStringExtra("longitude"));
 
                         Product product = new Product(name, description, price, latitude, longitude);
-                        Log.i("Contact Result:", product.toString());
+                        Log.i("Product Result:", product.toString());
                         productViewModel.saveProduct(product);
                     }
                 } else if (result.getResultCode() == 5) {
@@ -84,7 +84,7 @@ public class ProductListActivity extends AppCompatActivity implements SearchView
             if (productResult != null) {
                 products = productResult;
                 productAdapter = new ProductAdapter(products);
-
+                binding.productCount.setText("Product count: " + products.size());
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 recyclerView.setAdapter(productAdapter);
             }
@@ -133,6 +133,7 @@ public class ProductListActivity extends AppCompatActivity implements SearchView
         Intent newProductIntent = new Intent(this, ProductEntryActivity.class);
         newProductIntent.putExtra("updateBtn", false);
         newProductIntent.putExtra("deleteBtn", false);
+        newProductIntent.putExtra("showMapBtn", false);
         launcher.launch(newProductIntent);
     }
 

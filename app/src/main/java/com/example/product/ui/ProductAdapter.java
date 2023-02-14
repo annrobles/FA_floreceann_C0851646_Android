@@ -44,7 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText(filteredProducts.get(position).getName());
         holder.description.setText(filteredProducts.get(position).getDescription());
-        holder.price.setText(filteredProducts.get(position).getPrice().toString());
+        holder.price.setText("$" + filteredProducts.get(position).getPrice().toString());
 
         holder.productRowCardView.setOnClickListener(contactView -> {
             Intent productDetailIntent = new Intent(context, ProductEntryActivity.class);

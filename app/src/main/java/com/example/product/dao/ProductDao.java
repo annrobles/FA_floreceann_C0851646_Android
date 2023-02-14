@@ -16,7 +16,7 @@ public interface ProductDao {
     @Insert
     void save(Product product);
 
-    @Query("SELECT * FROM Product")
+    @Query("SELECT * FROM Product ORDER BY id")
     LiveData<List<Product>> fetchAll();
 
     @Delete

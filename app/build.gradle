@@ -45,4 +45,9 @@ dependencies {
     implementation 'androidx.room:room-common:2.5.0'
     implementation 'androidx.room:room-runtime:2.5.0'
     implementation 'androidx.room:room-testing:2.5.0'
+
+    // google map
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.google.android.gms:play-services-awareness:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 }
